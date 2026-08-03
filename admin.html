@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Dashboard - Dream Fly Income</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen p-4">
+
+    <!-- Admin Header -->
+    <div class="max-w-xl mx-auto bg-gray-800 rounded-2xl p-5 border border-yellow-500/30 shadow-xl mb-6">
+        <div class="flex justify-between items-center border-b border-gray-700 pb-3">
+            <div>
+                <h1 class="text-xl font-bold text-yellow-400">Owner Admin Panel</h1>
+                <p class="text-xs text-gray-400">Dream-fly-incom Control Center</p>
+            </div>
+            <span class="bg-red-900/50 text-red-400 border border-red-500/30 text-xs px-3 py-1 rounded-full font-mono">OWNER ACCESS</span>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-3 gap-2 mt-4 text-center">
+            <div class="bg-gray-900 p-3 rounded-xl border border-gray-700">
+                <p class="text-[10px] text-gray-400 uppercase">Total Users</p>
+                <p class="text-lg font-bold text-green-400">128</p>
+            </div>
+            <div class="bg-gray-900 p-3 rounded-xl border border-gray-700">
+                <p class="text-[10px] text-gray-400 uppercase">Total Staked</p>
+                <p class="text-lg font-bold text-yellow-400">$4,520</p>
+            </div>
+            <div class="bg-gray-900 p-3 rounded-xl border border-gray-700">
+                <p class="text-[10px] text-gray-400 uppercase">Pending Req</p>
+                <p class="text-lg font-bold text-red-400">3</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-xl mx-auto space-y-5">
+
+        <!-- Wallet Settings -->
+        <div class="bg-gray-800 rounded-2xl p-5 border border-gray-700 space-y-3">
+            <h3 class="font-bold text-sm text-yellow-400 flex items-center space-x-2">
+                <i class="fas fa-wallet"></i>
+                <span>Update Deposit Wallet Address (TRC20)</span>
+            </h3>
+            <div class="space-y-2">
+                <input type="text" id="walletInput" placeholder="Enter new TRC20 address..." class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-yellow-500">
+                <button onclick="alert('Wallet Address Updated Successfully!')" class="w-full bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold py-2.5 rounded-xl text-sm">
+                    Save New Wallet Address
+                </button>
+            </div>
+        </div>
+
+        <!-- Pending Approval Requests -->
+        <div class="bg-gray-800 rounded-2xl p-5 border border-gray-700 space-y-4">
+            <h3 class="font-bold text-sm text-yellow-400 flex items-center space-x-2">
+                <i class="fas fa-tasks"></i>
+                <span>Pending Approvals (Deposits / Withdrawals)</span>
+            </h3>
+
+            <!-- Item 1 -->
+            <div class="bg-gray-900 p-3 rounded-xl border border-gray-700 flex justify-between items-center">
+                <div>
+                    <span class="bg-green-900/40 text-green-400 border border-green-500/30 text-[10px] px-2 py-0.5 rounded">DEPOSIT</span>
+                    <p class="text-sm font-bold mt-1">$50.00 USDT</p>
+                    <p class="text-[10px] text-gray-400 font-mono">TxID: 0x8a...9c2</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="this.parentElement.parentElement.remove()" class="bg-green-600 hover:bg-green-500 text-white text-xs px-3 py-1.5 rounded-lg font-semibold">Approve</button>
+                    <button onclick="this.parentElement.parentElement.remove()" class="bg-red-600 hover:bg-red-500 text-white text-xs px-3 py-1.5 rounded-lg font-semibold">Reject</button>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="bg-gray-900 p-3 rounded-xl border border-gray-700 flex justify-between items-center">
+                <div>
+                    <span class="bg-yellow-900/40 text-yellow-400 border border-yellow-500/30 text-[10px] px-2 py-0.5 rounded">WITHDRAW</span>
+                    <p class="text-sm font-bold mt-1">$15.00 USDT</p>
+                    <p class="text-[10px] text-gray-400 font-mono">User: T9xP...4aK</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="this.parentElement.parentElement.remove()" class="bg-green-600 hover:bg-green-500 text-white text-xs px-3 py-1.5 rounded-lg font-semibold">Approve</button>
+                    <button onclick="this.parentElement.parentElement.remove()" class="bg-red-600 hover:bg-red-500 text-white text-xs px-3 py-1.5 rounded-lg font-semibold">Reject</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
+
