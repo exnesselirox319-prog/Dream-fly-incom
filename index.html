@@ -3,142 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoStaking 10% Daily</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Dream Fly Income - Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        body { background: #0f172a; color: #fff; padding: 15px; }
+        .container { max-width: 400px; margin: 0 auto; background: #1e293b; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        h2 { text-align: center; margin-bottom: 20px; color: #38bdf8; }
+        .card { background: #334155; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: center; }
+        .card h3 { font-size: 24px; color: #4ade80; margin-top: 5px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 14px; color: #cbd5e1; }
+        input { width: 100%; padding: 10px; border: 1px solid #475569; background: #0f172a; color: #fff; border-radius: 6px; font-size: 16px; }
+        button { width: 100%; padding: 12px; background: #0284c7; border: none; color: white; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #0369a1; }
+        .ref-box { background: #0f172a; padding: 10px; border-radius: 6px; font-size: 13px; word-break: break-all; border: 1px dashed #38bdf8; margin-top: 5px; color: #38bdf8; }
+    </style>
 </head>
-<body class="bg-gray-900 text-white font-sans min-h-screen pb-10">
+<body>
 
-    <!-- Navbar -->
-    <nav class="bg-gray-800 border-b border-gray-700 px-4 py-3 flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-            <i class="fas fa-coins text-yellow-500 text-2xl"></i>
-            <span class="font-bold text-lg tracking-wider">CryptoStake 10%</span>
-        </div>
-        <button class="bg-yellow-500 text-gray-900 px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-yellow-400">
-            Wallet
-        </button>
-    </nav>
-
-    <div class="max-w-md mx-auto px-4 mt-6 space-y-4">
-
-        <!-- Balance Overview Card -->
-        <div class="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-2xl p-5 border border-indigo-700 shadow-lg">
-            <p class="text-xs text-gray-300 uppercase tracking-widest font-semibold">Total Staked Balance</p>
-            <h2 class="text-3xl font-black mt-1">$<span id="staked-balance">0.00</span> <span class="text-sm font-normal text-gray-300">USDT</span></h2>
-            
-            <div class="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-indigo-800">
-                <div>
-                    <p class="text-xs text-gray-400">Daily Profit (10%)</p>
-                    <p class="text-lg font-bold text-green-400">+$<span id="daily-profit">0.00</span></p>
-                </div>
-                <div>
-                    <p class="text-xs text-gray-400">Available to Withdraw</p>
-                    <p class="text-lg font-bold text-yellow-400">$<span id="withdrawable">0.00</span></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <button onclick="alert('Deposit request initiated. Please send funds to the address shown below.');" class="bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-xl shadow-md flex justify-center items-center space-x-2">
-    <i class="fas fa-arrow-down"></i>
-    <span>Deposit</span>
-</button>
-
-            
-                
-                
-            
-            <button onclick="handleWithdraw()">
-
-    <i class="fas fa-arrow-up"></i>
-    <span>Withdraw</span>
-</button>
-
-                
-                
-            
-        
-
-        <!-- Staking Input Card -->
-        <div class="bg-gray-800 rounded-2xl p-5 border border-gray-700 space-y-3">
-            <div class="flex justify-between items-center">
-                <h3 class="font-bold text-lg text-yellow-400">10% Daily ROI Plan</h3>
-                <span class="bg-green-900 text-green-300 text-xs px-2.5 py-1 rounded-full border border-green-500">Active Plan</span>
-            </div>
-            <p class="text-xs text-gray-400">Earn 10% daily return on your staked amount.</p>
-            
-            <div class="space-y-2 pt-2">
-                <label class="text-xs text-gray-300 font-semibold">Enter Amount to Stake (USDT / TRX)</label>
-                <input type="number" placeholder="Min $10 - Max $5000" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500">
-            </div>
-
-            <button class="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-gray-900 font-black py-3 rounded-xl shadow-lg mt-2">
-                STAKE NOW
-            </button>
-        </div>
-
-        <!-- Deposit Info -->
-        <div class="bg-gray-800 rounded-2xl p-5 border border-gray-700 space-y-3">
-            <h4 class="font-bold text-sm text-gray-200">Deposit Address (TRC20)</h4>
-            <div class="bg-gray-900 p-3 rounded-xl border border-gray-700 flex justify-between items-center">
-                <span class="text-xs text-yellow-500 truncate mr-2 font-mono">TV7QzoSkw9Patn8tFakrrg6BnNSCBBrNSJ</span>
-                <button onclick="navigator.clipboard.writeText('TV7QzoSkw9Patn8tFakrrg6BnNSCBBrNSJ'); alert('Wallet Copied!');" class="bg-gray-800 hover:bg-gray-700 text-xs px-3 py-1.5 rounded-lg text-gray-300">Copy</button>
-
-            </div>
-            <p class="text-[10px] text-gray-400">* Send minimum 10 USDT/TRX. Deposits take 1-3 network confirmations.</p>
-        </div>
-
+<div class="container">
+    <h2>🚀 Dream Fly Income</h2>
+    
+    <div class="card">
+        <p>Total Balance</p>
+        <h3 id="userBalance">$50.00</h3>
     </div>
 
-</body>
-    <div id="withdrawModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center;">
-    <div style="background:#1f2937; padding:20px; border-radius:10px; width:90%; max-width:400px; color:white; text-align:left;">
-        <h3>Withdraw Funds</h3>
-        <p style="font-size:12px; color:#9ca3af; margin-bottom:15px;">Enter your amount and password to proceed.</p>
-        
-        <label style="font-size:14px;">Amount (USDT)</label>
-        <input type="number" id="wAmount" placeholder="Enter amount" style="width:100%; padding:10px; margin:5px 0 15px 0; background:#374151; border:none; color:white; border-radius:5px;">
-        
-        <label style="font-size:14px;">Password / PIN</label>
-        <input type="password" id="wPassword" placeholder="Enter password" style="width:100%; padding:10px; margin:5px 0 15px 0; background:#374151; border:none; color:white; border-radius:5px;">
-        
-        <div style="display:flex; justify-content:space-between;">
-            <button onclick="submitWithdrawRequest()" style="background:#10b981; color:white; padding:10px 20px; border:none; border-radius:5px; cursor:pointer; width:48%;">Submit</button>
-            <button onclick="closeWithdrawModal()" style="background:#ef4444; color:white; padding:10px 20px; border:none; border-radius:5px; cursor:pointer; width:48%;">Cancel</button>
-        </div>
+    <div class="card" style="text-align: left;">
+        <p style="text-align: center; margin-bottom: 5px; font-weight: bold;">Your Referral Link</p>
+        <div class="ref-box" id="refLink">Loading...</div>
     </div>
+
+    <div class="form-group">
+        <label>Withdrawal Amount ($)</label>
+        <input type="number" id="amount" placeholder="Enter amount">
+    </div>
+
+    <div class="form-group">
+        <label>Account Password</label>
+        <input type="password" id="password" placeholder="Enter password">
+    </div>
+
+    <button onclick="submitWithdrawal()">Withdraw Now</button>
 </div>
 
 <script>
-function handleWithdraw() {
-    document.getElementById('withdrawModal').style.display = 'flex';
-}
-
-function closeWithdrawModal() {
-    document.getElementById('withdrawModal').style.display = 'none';
-}
-
-function submitWithdrawRequest() {
-    const amount = document.getElementById('wAmount').value;
-    const password = document.getElementById('wPassword').value;
-
-    if (!amount || !password) {
-        alert("Please fill in all fields!");
-        return;
+    // Generate Unique Referral Link based on random ID or phone
+    let userId = localStorage.getItem('df_user');
+    if (!userId) {
+        userId = 'DF' + Math.floor(100000 + Math.random() * 900000);
+        localStorage.setItem('df_user', userId);
     }
-
-    alert("Withdrawal request of $" + amount + " submitted successfully. It will be processed soon.");
-    closeWithdrawModal();
-    document.getElementById('wAmount').value = '';
-    document.getElementById('wPassword').value = '';
-}
-</script>
     
+    const currentUrl = window.location.origin + window.location.pathname;
+    document.getElementById('refLink').innerText = currentUrl + "?ref=" + userId;
 
-   
+    function submitWithdrawal() {
+        let amount = document.getElementById('amount').value;
+        let password = document.getElementById('password').value;
 
+        if(!amount || !password) {
+            alert("Please fill all fields!");
+            return;
+        }
 
+        alert("Withdrawal Request Submitted Successfully! Pending review.");
+        document.getElementById('amount').value = '';
+        document.getElementById('password').value = '';
+    }
+</script>
 
+</body>
 </html>
-
