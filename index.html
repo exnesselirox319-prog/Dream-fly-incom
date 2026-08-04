@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dream Fly Income - Portal</title>
+    <title>Dream Fly Income - Pro Dashboard</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
         body { background: #0f172a; color: #fff; padding: 15px; }
         .container { max-width: 400px; margin: 0 auto; background: #1e293b; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         h2 { text-align: center; margin-bottom: 20px; color: #38bdf8; }
         .card { background: #334155; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: center; }
-        .card h3 { font-size: 24px; color: #4ade80; margin-top: 5px; }
+        .card h3 { font-size: 22px; color: #4ade80; margin-top: 5px; }
         .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-size: 14px; color: #cbd5e1; }
-        input { width: 100%; padding: 10px; border: 1px solid #475569; background: #0f172a; color: #fff; border-radius: 6px; font-size: 16px; }
-        button { width: 100%; padding: 12px; background: #0284c7; border: none; color: white; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; margin-top: 5px; }
+        label { display: block; margin-bottom: 5px; font-size: 13px; color: #cbd5e1; }
+        input { width: 100%; padding: 10px; border: 1px solid #475569; background: #0f172a; color: #fff; border-radius: 6px; font-size: 15px; }
+        button { width: 100%; padding: 12px; background: #0284c7; border: none; color: white; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; margin-top: 5px; }
         button:hover { background: #0369a1; }
-        .ref-box { background: #0f172a; padding: 10px; border-radius: 6px; font-size: 13px; word-break: break-all; border: 1px dashed #38bdf8; margin-top: 5px; color: #38bdf8; text-align: left; }
+        .ref-box { background: #0f172a; padding: 10px; border-radius: 6px; font-size: 12px; word-break: break-all; border: 1px dashed #38bdf8; margin-top: 5px; color: #38bdf8; text-align: left; }
         .hidden { display: none; }
         .stats-row { display: flex; gap: 10px; margin-bottom: 15px; }
         .stats-card { flex: 1; background: #334155; padding: 12px; border-radius: 8px; text-align: center; }
-        .stats-card h4 { color: #38bdf8; font-size: 18px; margin-top: 4px; }
+        .stats-card h4 { color: #38bdf8; font-size: 16px; margin-top: 4px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- AUTH SECTION (Login / Register) -->
+    <!-- AUTH SECTION -->
     <div id="authSection">
         <h2 id="authTitle">🔐 User Register</h2>
         <div class="form-group">
@@ -48,23 +48,43 @@
         <h2>🚀 Dream Fly Income</h2>
         
         <div class="card">
-            <p>Total Balance</p>
+            <p>Main Wallet Balance</p>
             <h3 id="userBalance">$10.00</h3>
         </div>
 
         <div class="stats-row">
             <div class="stats-card">
-                <p style="font-size: 12px; color: #94a3b8;">Total Referrals</p>
+                <p style="font-size: 11px; color: #94a3b8;">Total Staked</p>
+                <h4 id="stakedAmount">$0.00</h4>
+            </div>
+            <div class="stats-card">
+                <p style="font-size: 11px; color: #94a3b8;">Total Profit</p>
+                <h4 id="profitAmount" style="color: #4ade80;">$0.00</h4>
+            </div>
+        </div>
+
+        <div class="stats-row">
+            <div class="stats-card">
+                <p style="font-size: 11px; color: #94a3b8;">Referrals</p>
                 <h4 id="refCount">0</h4>
             </div>
             <div class="stats-card">
-                <p style="font-size: 12px; color: #94a3b8;">Ref Commission</p>
+                <p style="font-size: 11px; color: #94a3b8;">Ref Commission</p>
                 <h4 id="refEarnings">$0.00</h4>
             </div>
         </div>
 
+        <!-- STAKE INVESTMENT BOX -->
+        <div class="card" style="text-align: left; background: #1e293b; border: 1px solid #334155;">
+            <label style="font-weight: bold; color: #38bdf8; margin-bottom: 8px;">Staking / Investment Plan</label>
+            <div class="form-group" style="margin-bottom: 8px;">
+                <input type="number" id="stakeInput" placeholder="Enter amount to stake ($)">
+            </div>
+            <button onclick="stakeMoney()" style="background: #16a34a;">Start Staking</button>
+        </div>
+
         <div class="card" style="text-align: left;">
-            <p style="text-align: center; margin-bottom: 5px; font-weight: bold;">Your Referral Link</p>
+            <p style="text-align: center; margin-bottom: 5px; font-weight: bold; font-size: 13px;">Your Referral Link</p>
             <div class="ref-box" id="refLink">Loading...</div>
         </div>
 
@@ -81,14 +101,12 @@
 <script>
     let isLoginMode = false;
 
-    // Check if user is already logged in
     window.onload = function() {
         let loggedUser = localStorage.getItem('df_logged_user');
         if (loggedUser) {
             showDashboard(loggedUser);
         }
         
-        // Capture referral from URL if exists
         const urlParams = new URLSearchParams(window.location.search);
         const refBy = urlParams.get('ref');
         if (refBy) {
@@ -113,17 +131,15 @@
         }
 
         if (!isLoginMode) {
-            // Registration logic
             localStorage.setItem('df_user_' + user, pass);
-            localStorage.setItem('df_balance_' + user, "10.00"); // Bonus on signup
+            localStorage.setItem('df_balance_' + user, "10.00");
+            localStorage.setItem('df_staked_' + user, "0.00");
+            localStorage.setItem('df_profit_' + user, "0.00");
             localStorage.setItem('df_refs_' + user, "0");
             localStorage.setItem('df_ref_earn_' + user, "0.00");
             
-            // Check if registered via referral
             let invitedBy = localStorage.getItem('df_invited_by');
             if (invitedBy && invitedBy !== user) {
-                localStorage.setItem('df_u_inviter_' + user, invitedBy);
-                // Give commission to inviter if stored locally
                 let inviterRefs = parseInt(localStorage.getItem('df_refs_' + invitedBy) || "0") + 1;
                 localStorage.setItem('df_refs_' + invitedBy, inviterRefs);
                 let inviterEarn = parseFloat(localStorage.getItem('df_ref_earn_' + invitedBy) || "0.00") + 5.00;
@@ -134,7 +150,6 @@
 
             alert("Registration Successful! Welcome bonus $10 added.");
         } else {
-            // Login logic
             let savedPass = localStorage.getItem('df_user_' + user);
             if (!savedPass || savedPass !== pass) {
                 alert("Invalid username or password!");
@@ -151,15 +166,50 @@
         document.getElementById('dashboardSection').classList.remove('hidden');
 
         let balance = localStorage.getItem('df_balance_' + user) || "10.00";
+        let staked = localStorage.getItem('df_staked_' + user) || "0.00";
+        let profit = localStorage.getItem('df_profit_' + user) || "0.00";
         let refs = localStorage.getItem('df_refs_' + user) || "0";
         let refEarn = localStorage.getItem('df_ref_earn_' + user) || "0.00";
 
         document.getElementById('userBalance').innerText = "$" + balance;
+        document.getElementById('stakedAmount').innerText = "$" + staked;
+        document.getElementById('profitAmount').innerText = "$" + profit;
         document.getElementById('refCount').innerText = refs;
         document.getElementById('refEarnings').innerText = "$" + refEarn;
 
         const currentUrl = window.location.origin + window.location.pathname;
         document.getElementById('refLink').innerText = currentUrl + "?ref=" + user;
+    }
+
+    function stakeMoney() {
+        let user = localStorage.getItem('df_logged_user');
+        let amount = parseFloat(document.getElementById('stakeInput').value);
+        let currentBal = parseFloat(localStorage.getItem('df_balance_' + user) || "0");
+
+        if (!amount || amount <= 0) {
+            alert("Please enter a valid staking amount!");
+            return;
+        }
+
+        if (amount > currentBal) {
+            alert("Insufficient main balance to stake this amount!");
+            return;
+        }
+
+        let newBal = currentBal - amount;
+        let currentStaked = parseFloat(localStorage.getItem('df_staked_' + user) || "0");
+        let newStaked = currentStaked + amount;
+        let currentProfit = parseFloat(localStorage.getItem('df_profit_' + user) || "0");
+        let addedProfit = (amount * 0.10); // 10% instant simulation profit
+        let newProfit = currentProfit + addedProfit;
+
+        localStorage.setItem('df_balance_' + user, newBal.toFixed(2));
+        localStorage.setItem('df_staked_' + user, newStaked.toFixed(2));
+        localStorage.setItem('df_profit_' + user, newProfit.toFixed(2));
+
+        alert("Staking Successful! You staked $" + amount + " and earned $" + addedProfit.toFixed(2) + " profit.");
+        document.getElementById('stakeInput').value = '';
+        showDashboard(user);
     }
 
     function submitWithdrawal() {
