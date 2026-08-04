@@ -90,5 +90,37 @@
     </div>
 
 </body>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBGsuSRPcD4hURyQh7R9SLickgkWdNc",
+        authDomain: "dream-fly-incom-c4f7b.firebaseapp.com",
+        projectId: "dream-fly-incom-c4f7b",
+        storageBucket: "dream-fly-incom-c4f7b.appspot.com",
+        messagingSenderId: "263294408302",
+        appId: "1:263294408302:web:e5d1913f0a61d0e8eeb87f"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    window.onload = function() {
+        db.ref('users').on('value', (snapshot) => {
+            if (snapshot.exists()) {
+                let totalUsersCount = Object.keys(snapshot.val()).length;
+                let totalUsersEl = document.getElementById('totalUsers');
+                if (totalUsersEl) {
+                    totalUsersEl.innerText = totalUsersCount;
+                }
+            } else {
+                let totalUsersEl = document.getElementById('totalUsers');
+                if (totalUsersEl) {
+                    totalUsersEl.innerText = 0;
+                }
+            }
+        });
+    };
+</script>
+
 </html>
 
