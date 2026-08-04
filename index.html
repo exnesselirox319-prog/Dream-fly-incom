@@ -36,9 +36,10 @@
         .b-item p { font-size: 12px; color: #c7d2fe; }
         .b-item h3 { font-size: 18px; color: #fff; margin-top: 3px; }
 
-        .action-btns { display: flex; gap: 15px; margin-bottom: 20px; }
-        .act-btn { flex: 1; padding: 14px; border: none; border-radius: 14px; font-weight: bold; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .action-btns { display: flex; gap: 8px; margin-bottom: 20px; }
+        .act-btn { flex: 1; padding: 12px 6px; border: none; border-radius: 12px; font-weight: bold; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
         .deposit-act { background: linear-gradient(135deg, #10b981, #059669); color: #fff; }
+        .invest-act { background: linear-gradient(135deg, #a855f7, #7e22ce); color: #fff; }
         .withdraw-act { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; }
 
         .ticker-box { background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 15px; margin-bottom: 20px; }
@@ -57,6 +58,11 @@
         .level-info h4 { font-size: 15px; color: #f8fafc; }
         .level-info p { font-size: 12px; color: #9ca3af; margin-top: 2px; }
         .level-badge { background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 5px 10px; border-radius: 8px; font-weight: bold; font-size: 13px; }
+
+        .plan-card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 18px; margin-bottom: 15px; border-left: 4px solid #a855f7; }
+        .plan-card h3 { font-size: 16px; color: #fff; margin-bottom: 8px; }
+        .plan-info { display: flex; justify-content: space-between; font-size: 13px; color: #9ca3af; margin-bottom: 12px; }
+        .plan-btn { width: 100%; padding: 10px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 14px; }
 
         .about-card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 20px; margin-bottom: 15px; }
         .about-card h3 { font-size: 16px; color: #a855f7; margin-bottom: 10px; }
@@ -84,7 +90,6 @@
         .hidden { display: none !important; }
     </style>
 
-    <!-- FIREBASE SDK SCRIPTS -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 </head>
@@ -159,7 +164,8 @@
 
             <div class="action-btns">
                 <button class="act-btn deposit-act" onclick="openDepositModal()">📥 Deposit</button>
-                <button class="act-btn withdraw-act" onclick="openWithdrawModal()">📤 Withdrawal</button>
+                <button class="act-btn invest-act" onclick="openInvestModal()">🚀 Invest</button>
+                <button class="act-btn withdraw-act" onclick="openWithdrawModal()">📤 Withdraw</button>
             </div>
 
             <div class="ticker-box">
@@ -286,6 +292,44 @@
         </div>
     </div>
 
+    <!-- INVEST SUB-PAGE -->
+    <div id="investModal" class="sub-page">
+        <div class="sub-header">
+            <span class="back-arrow" onclick="closeModal('investModal')">←</span>
+            <span>AI Quantitative Investment Plans</span>
+        </div>
+        <div class="form-container">
+            <p style="font-size: 13px; color: #9ca3af; margin-bottom: 15px;">Choose an investment package to start your daily automated trading earnings:</p>
+            
+            <div class="plan-card">
+                <h3>Starter AI Plan</h3>
+                <div class="plan-info">
+                    <span>Min: $10</span>
+                    <span>Daily Return: 4.5%</span>
+                </div>
+                <button class="plan-btn" onclick="investPlan(10, 0.45)">Invest $10</button>
+            </div>
+
+            <div class="plan-card">
+                <h3>Advanced VIP Plan</h3>
+                <div class="plan-info">
+                    <span>Min: $50</span>
+                    <span>Daily Return: 6.0%</span>
+                </div>
+                <button class="plan-btn" onclick="investPlan(50, 3.0)">Invest $50</button>
+            </div>
+
+            <div class="plan-card">
+                <h3>Pro Quantitative Plan</h3>
+                <div class="plan-info">
+                    <span>Min: $100</span>
+                    <span>Daily Return: 8.0%</span>
+                </div>
+                <button class="plan-btn" onclick="investPlan(100, 8.0)">Invest $100</button>
+            </div>
+        </div>
+    </div>
+
     <!-- WITHDRAWAL SUB-PAGE -->
     <div id="withdrawModal" class="sub-page">
         <div class="sub-header">
@@ -306,7 +350,6 @@
     </div>
 
 <script>
-    // FIREBASE CONFIGURATION SETUP
     const firebaseConfig = {
         apiKey: "AIzaSyBGsuSRPcD4hURyQSh7R9SLickgkWMdMc",
         authDomain: "dream-fly-incom-c4f7b.firebaseapp.com",
@@ -408,7 +451,6 @@
         document.getElementById('headerUser').innerText = user.name;
         document.getElementById('refLinkInput').value = window.location.origin + window.location.pathname + "?ref=" + user.email;
 
-        // Real-time listener for live balance updates from database
         db.ref('users/' + currentUserKey).on('value', (snapshot) => {
             if(snapshot.exists()) {
                 updateDashboardUI(snapshot.val());
@@ -432,6 +474,7 @@
     }
 
     function openDepositModal() { document.getElementById('depositModal').style.display = 'block'; }
+    function openInvestModal() { document.getElementById('investModal').style.display = 'block'; }
     function openWithdrawModal() { document.getElementById('withdrawModal').style.display = 'block'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
@@ -463,10 +506,8 @@
         db.ref('users/' + currentUserKey).once('value').then((snapshot) => {
             let user = snapshot.val();
             user.balance = (user.balance || 0) + amt;
-            user.investment = (user.investment || 0) + amt;
 
             db.ref('users/' + currentUserKey).set(user).then(() => {
-                // Save record to admin requests queue
                 db.ref('deposits').push({
                     username: user.name,
                     email: user.email,
@@ -474,8 +515,29 @@
                     time: new Date().toLocaleString()
                 });
 
-                alert("Deposit request and proof submitted successfully! Approved & added to balance.");
+                alert("Deposit request submitted successfully! Added to your balance.");
                 closeModal('depositModal');
+            });
+        });
+    }
+
+    function investPlan(amount, dailyProfit) {
+        db.ref('users/' + currentUserKey).once('value').then((snapshot) => {
+            let user = snapshot.val();
+
+            if((user.balance || 0) < amount) {
+                alert("Insufficient balance! Please deposit funds first.");
+                return;
+            }
+
+            user.balance -= amount;
+            user.investment = (user.investment || 0) + amount;
+            user.todayEarn = (user.todayEarn || 0) + dailyProfit;
+            user.balance += dailyProfit;
+
+            db.ref('users/' + currentUserKey).set(user).then(() => {
+                alert("Successfully invested $" + amount + "! Daily earning activated.");
+                closeModal('investModal');
             });
         });
     }
