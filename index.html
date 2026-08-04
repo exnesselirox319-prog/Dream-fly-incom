@@ -8,11 +8,9 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: #0b0f19; color: #fff; padding-bottom: 80px; overflow-x: hidden; }
         
-        /* BACKGROUND ANIMATED GLOW */
         .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 20%, rgba(126, 34, 206, 0.15), transparent 50%), radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.15), transparent 50%); z-index: -1; animation: bgPulse 8s ease infinite alternate; }
         @keyframes bgPulse { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
 
-        /* AUTH SECTION (Purple Theme) */
         #authSection { background: linear-gradient(135deg, #2e1065, #1e1b4b); min-height: 100vh; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
         .auth-logo-area { text-align: center; padding-top: 30px; }
         .logo-badge { width: 70px; height: 70px; background: linear-gradient(135deg, #a855f7, #6366f1); border-radius: 20px; margin: 0 auto 15px auto; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; box-shadow: 0 10px 25px rgba(168,85,247,0.4); }
@@ -24,19 +22,15 @@
         .auth-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #7e22ce, #4f46e5); border: none; color: white; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 15px rgba(126,34,206,0.4); }
         .auth-links { display: flex; justify-content: space-between; margin-top: 15px; font-size: 13px; color: #64748b; cursor: pointer; }
 
-        /* MAIN APP CONTAINER */
         #appContainer { display: none; max-width: 480px; margin: 0 auto; background: #0b0f19; min-height: 100vh; position: relative; border-left: 1px solid #1e293b; border-right: 1px solid #1e293b; }
         
-        /* TOP APP BAR */
         .app-bar { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #111827; border-bottom: 1px solid #1f2937; position: sticky; top: 0; z-index: 50; }
         .app-title { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: bold; color: #f8fafc; }
         .mini-logo { width: 35px; height: 35px; background: linear-gradient(135deg, #a855f7, #6366f1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; }
         
-        /* VIEWS */
         .view { display: none; padding: 20px; }
         .view.active { display: block; }
 
-        /* DASHBOARD CARDS */
         .balance-card { background: linear-gradient(135deg, #1e1b4b, #312e81); border: 1px solid #4338ca; border-radius: 20px; padding: 20px; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
         .balance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
         .b-item p { font-size: 12px; color: #c7d2fe; }
@@ -47,13 +41,11 @@
         .deposit-act { background: linear-gradient(135deg, #10b981, #059669); color: #fff; }
         .withdraw-act { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; }
 
-        /* LIVE TRANSACTIONS TICKER */
         .ticker-box { background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 15px; margin-bottom: 20px; }
         .ticker-title { font-size: 13px; color: #9ca3af; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
         .ticker-item { font-size: 12px; color: #e5e7eb; padding: 6px 0; border-bottom: 1px dashed #1f2937; display: flex; justify-content: space-between; }
         .ticker-item span { color: #10b981; font-weight: bold; }
 
-        /* REFERRAL SECTION STYLES */
         .ref-banner { background: linear-gradient(135deg, #7e22ce, #3b82f6); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 20px; }
         .ref-banner h3 { font-size: 22px; margin-bottom: 5px; }
         .ref-banner p { font-size: 13px; opacity: 0.9; }
@@ -66,14 +58,12 @@
         .level-info p { font-size: 12px; color: #9ca3af; margin-top: 2px; }
         .level-badge { background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 5px 10px; border-radius: 8px; font-weight: bold; font-size: 13px; }
 
-        /* ABOUT SECTION STYLES */
         .about-card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 20px; margin-bottom: 15px; }
         .about-card h3 { font-size: 16px; color: #a855f7; margin-bottom: 10px; }
         .about-card p { font-size: 13px; color: #9ca3af; line-height: 1.6; }
         .cert-box { background: #1f2937; padding: 12px; border-radius: 10px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .cert-box span { font-size: 13px; font-weight: bold; color: #38bdf8; }
 
-        /* SUB-PAGES / MODALS */
         .sub-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0b0f19; z-index: 100; display: none; overflow-y: auto; max-width: 480px; margin: 0 auto; right: 0; }
         .sub-header { display: flex; align-items: center; padding: 15px 20px; background: #111827; border-bottom: 1px solid #1f2937; gap: 15px; font-size: 16px; font-weight: bold; }
         .back-arrow { font-size: 22px; cursor: pointer; }
@@ -86,7 +76,6 @@
         
         .primary-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #7e22ce, #3b82f6); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(126,34,206,0.4); }
 
-        /* BOTTOM NAV BAR */
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; max-width: 480px; background: #111827; border-top: 1px solid #1f2937; display: flex; justify-content: space-around; padding: 10px 0; z-index: 90; margin: 0 auto; right: 0; }
         .nav-item { text-align: center; color: #9ca3af; font-size: 11px; cursor: pointer; }
         .nav-item.active { color: #a855f7; }
@@ -94,12 +83,16 @@
 
         .hidden { display: none !important; }
     </style>
+
+    <!-- FIREBASE SDK SCRIPTS -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 </head>
 <body>
 
     <div class="bg-glow"></div>
 
-    <!-- AUTH SECTION (SIGN UP / LOGIN) -->
+    <!-- AUTH SECTION -->
     <div id="authSection">
         <div class="auth-logo-area">
             <div class="logo-badge">DF</div>
@@ -313,12 +306,31 @@
     </div>
 
 <script>
+    // FIREBASE CONFIGURATION SETUP
+    const firebaseConfig = {
+        apiKey: "AIzaSyBGsuSRPcD4hURyQSh7R9SLickgkWMdMc",
+        authDomain: "dream-fly-incom-c4f7b.firebaseapp.com",
+        projectId: "dream-fly-incom-c4f7b",
+        storageBucket: "dream-fly-incom-c4f7b.appspot.com",
+        messagingSenderId: "263294408302",
+        appId: "1:263294408302:web:e5d1913f0a61d0e8eeb87f"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
     let isLoginMode = false;
+    let currentUserKey = null;
 
     window.onload = function() {
-        let loggedUser = localStorage.getItem('df_logged_user');
-        if(loggedUser) {
-            initApp(loggedUser);
+        let savedKey = localStorage.getItem('df_logged_user_key');
+        if(savedKey) {
+            db.ref('users/' + savedKey).once('value').then((snapshot) => {
+                if(snapshot.exists()) {
+                    currentUserKey = savedKey;
+                    initApp(snapshot.val());
+                }
+            });
         }
     }
 
@@ -333,13 +345,15 @@
     }
 
     function handleAuthSubmit() {
-        let email = document.getElementById('regEmail').value.trim();
+        let emailInput = document.getElementById('regEmail').value.trim();
         let pass = document.getElementById('regPass').value.trim();
 
-        if(!email || !pass) {
+        if(!emailInput || !pass) {
             alert("Please fill all required fields!");
             return;
         }
+
+        let safeEmailKey = emailInput.replace(/[.#$\/\[\]]/g, "_");
 
         if(!isLoginMode) {
             let name = document.getElementById('regName').value.trim();
@@ -348,59 +362,66 @@
             if(!name) { alert("Please enter a username!"); return; }
             if(pass !== cpass) { alert("Passwords do not match!"); return; }
 
-            if(localStorage.getItem('df_user_' + email)) {
-                alert("User already registered with this email!");
-                return;
-            }
-
-            // Save user data
-            let userData = {
-                name: name,
-                email: email,
-                pass: pass,
-                balance: 0.00,
-                investment: 0.00,
-                todayEarn: 0.00,
-                refCount: 0,
-                refEarn: 0.00
-            };
-            localStorage.setItem('df_user_' + email, JSON.stringify(userData));
-            alert("Registration successful! Please login.");
-            toggleAuthMode();
+            db.ref('users/' + safeEmailKey).once('value').then((snapshot) => {
+                if(snapshot.exists()) {
+                    alert("User already registered with this email!");
+                } else {
+                    let userData = {
+                        name: name,
+                        email: emailInput,
+                        pass: pass,
+                        balance: 0.00,
+                        investment: 0.00,
+                        todayEarn: 0.00,
+                        refCount: 0,
+                        refEarn: 0.00
+                    };
+                    db.ref('users/' + safeEmailKey).set(userData).then(() => {
+                        alert("Registration successful! Please login.");
+                        toggleAuthMode();
+                    });
+                }
+            });
         } else {
-            let savedData = localStorage.getItem('df_user_' + email);
-            if(!savedData) {
-                alert("User not found! Please register first.");
-                return;
-            }
-            let user = JSON.parse(savedData);
-            if(user.pass !== pass) {
-                alert("Incorrect password!");
-                return;
-            }
+            db.ref('users/' + safeEmailKey).once('value').then((snapshot) => {
+                if(!snapshot.exists()) {
+                    alert("User not found! Please register first.");
+                    return;
+                }
+                let user = snapshot.val();
+                if(user.pass !== pass) {
+                    alert("Incorrect password!");
+                    return;
+                }
 
-            localStorage.setItem('df_logged_user', email);
-            initApp(email);
+                localStorage.setItem('df_logged_user_key', safeEmailKey);
+                currentUserKey = safeEmailKey;
+                initApp(user);
+            });
         }
     }
 
-    function initApp(email) {
+    function initApp(user) {
         document.getElementById('authSection').classList.add('hidden');
         document.getElementById('appContainer').style.display = 'block';
 
-        let user = JSON.parse(localStorage.getItem('df_user_' + email));
         document.getElementById('headerUser').innerText = user.name;
         document.getElementById('refLinkInput').value = window.location.origin + window.location.pathname + "?ref=" + user.email;
 
-        updateDashboardUI(user);
+        // Real-time listener for live balance updates from database
+        db.ref('users/' + currentUserKey).on('value', (snapshot) => {
+            if(snapshot.exists()) {
+                updateDashboardUI(snapshot.val());
+            }
+        });
     }
 
     function updateDashboardUI(user) {
-        document.getElementById('totalBalanceDisplay').innerText = "$" + user.balance.toFixed(2);
-        document.getElementById('totalInvestmentDisplay').innerText = "$" + user.investment.toFixed(2);
-        document.getElementById('todayEarnDisplay').innerText = "$" + user.todayEarn.toFixed(2);
-        document.getElementById('totalRefCount').innerText = user.refCount + " Users";
-        document.getElementById('totalRefEarn').innerText = "$" + user.refEarn.toFixed(2);
+        document.getElementById('totalBalanceDisplay').innerText = "$" + (user.balance || 0).toFixed(2);
+        document.getElementById('totalInvestmentDisplay').innerText = "$" + (user.investment || 0).toFixed(2);
+        document.getElementById('todayEarnDisplay').innerText = "$" + (user.todayEarn || 0).toFixed(2);
+        document.getElementById('totalRefCount').innerText = (user.refCount || 0) + " Users";
+        document.getElementById('totalRefEarn').innerText = "$" + (user.refEarn || 0).toFixed(2);
     }
 
     function switchTab(viewId, element) {
@@ -439,17 +460,24 @@
             return;
         }
 
-        let email = localStorage.getItem('df_logged_user');
-        let user = JSON.parse(localStorage.getItem('df_user_' + email));
+        db.ref('users/' + currentUserKey).once('value').then((snapshot) => {
+            let user = snapshot.val();
+            user.balance = (user.balance || 0) + amt;
+            user.investment = (user.investment || 0) + amt;
 
-        // Simulate admin approval instantly for live testing & investment
-        user.balance += amt;
-        user.investment += amt;
-        localStorage.setItem('df_user_' + email, JSON.stringify(user));
+            db.ref('users/' + currentUserKey).set(user).then(() => {
+                // Save record to admin requests queue
+                db.ref('deposits').push({
+                    username: user.name,
+                    email: user.email,
+                    amount: amt,
+                    time: new Date().toLocaleString()
+                });
 
-        alert("Deposit request and proof submitted successfully! Admin approved and added to your balance.");
-        updateDashboardUI(user);
-        closeModal('depositModal');
+                alert("Deposit request and proof submitted successfully! Approved & added to balance.");
+                closeModal('depositModal');
+            });
+        });
     }
 
     function submitWithdrawRequest() {
@@ -461,24 +489,31 @@
             return;
         }
 
-        let email = localStorage.getItem('df_logged_user');
-        let user = JSON.parse(localStorage.getItem('df_user_' + email));
+        db.ref('users/' + currentUserKey).once('value').then((snapshot) => {
+            let user = snapshot.val();
 
-        if(user.pass !== pass) {
-            alert("Incorrect password!");
-            return;
-        }
-        if(user.balance < amt) {
-            alert("Insufficient balance!");
-            return;
-        }
+            if(user.pass !== pass) {
+                alert("Incorrect password!");
+                return;
+            }
+            if((user.balance || 0) < amt) {
+                alert("Insufficient balance!");
+                return;
+            }
 
-        user.balance -= amt;
-        localStorage.setItem('df_user_' + email, JSON.stringify(user));
+            user.balance -= amt;
+            db.ref('users/' + currentUserKey).set(user).then(() => {
+                db.ref('withdrawals').push({
+                    username: user.name,
+                    email: user.email,
+                    amount: amt,
+                    time: new Date().toLocaleString()
+                });
 
-        alert("Withdrawal request sent to Admin successfully! Funds will be transferred to your wallet shortly.");
-        updateDashboardUI(user);
-        closeModal('withdrawModal');
+                alert("Withdrawal request sent to Admin successfully!");
+                closeModal('withdrawModal');
+            });
+        });
     }
 </script>
 
