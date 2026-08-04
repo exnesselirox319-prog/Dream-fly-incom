@@ -3,227 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dream Fly Income - Pro Dashboard</title>
+    <title>Dream Fly Income</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
-        body { background: #0f172a; color: #fff; padding: 15px; }
-        .container { max-width: 400px; margin: 0 auto; background: #1e293b; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        h2 { text-align: center; margin-bottom: 20px; color: #38bdf8; }
-        .card { background: #334155; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: center; }
-        .card h3 { font-size: 22px; color: #4ade80; margin-top: 5px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-size: 13px; color: #cbd5e1; }
-        input { width: 100%; padding: 10px; border: 1px solid #475569; background: #0f172a; color: #fff; border-radius: 6px; font-size: 15px; }
-        button { width: 100%; padding: 12px; background: #0284c7; border: none; color: white; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; margin-top: 5px; }
-        button:hover { background: #0369a1; }
-        .ref-box { background: #0f172a; padding: 10px; border-radius: 6px; font-size: 12px; word-break: break-all; border: 1px dashed #38bdf8; margin-top: 5px; color: #38bdf8; text-align: left; }
-        .hidden { display: none; }
-        .stats-row { display: flex; gap: 10px; margin-bottom: 15px; }
-        .stats-card { flex: 1; background: #334155; padding: 12px; border-radius: 8px; text-align: center; }
-        .stats-card h4 { color: #38bdf8; font-size: 16px; margin-top: 4px; }
+        body { background: #0b0f19; color: #fff; padding-bottom: 70px; }
+        
+        /* AUTH PAGE STYLES (Purple Theme) */
+        #authSection { background: linear-gradient(135deg, #2e1065, #1e1b4b); min-height: 100vh; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
+        .auth-top { text-align: right; padding-top: 10px; font-size: 14px; color: #e2e8f0; }
+        .auth-card { background: #ffffff; color: #1e293b; padding: 25px 20px; border-radius: 24px 24px 0 0; box-shadow: 0 -10px 25px rgba(0,0,0,0.3); margin-top: auto; }
+        .auth-card h2 { text-align: center; color: #581c87; margin-bottom: 25px; font-size: 22px; }
+        .input-group { position: relative; margin-bottom: 20px; }
+        .input-group input { width: 100%; padding: 14px 15px 14px 15px; border: 1px solid #e2e8f0; background: #f8fafc; border-radius: 12px; font-size: 16px; outline: none; }
+        .auth-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #7e22ce, #581c87); border: none; color: white; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; margin-top: 10px; }
+        .auth-links { display: flex; justify-content: space-between; margin-top: 15px; font-size: 14px; color: #64748b; cursor: pointer; }
+        
+        /* DASHBOARD STYLES (Blue Theme) */
+        #dashboardSection { display: none; padding: 15px; max-width: 480px; margin: 0 auto; }
+        .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .dash-title { font-size: 16px; color: #94a3b8; }
+        .dash-title span { color: #fff; font-weight: bold; }
+        
+        .top-earned-card { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid #334155; border-radius: 16px; padding: 20px; margin-bottom: 15px; position: relative; }
+        .earned-row { display: flex; justify-content: space-between; align-items: center; }
+        .earned-amount { font-size: 32px; font-weight: bold; color: #fff; margin-top: 5px; }
+        .withdraw-btn { background: #2563eb; color: #fff; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        
+        .energy-card { background: linear-gradient(135deg, #2563eb, #1d4ed8); border-radius: 16px; padding: 20px; margin-bottom: 15px; position: relative; }
+        .energy-title { font-size: 14px; color: #bfdbfe; margin-bottom: 5px; }
+        .energy-amount { font-size: 28px; font-weight: bold; color: #fff; letter-spacing: 1px; }
+        .energy-stats { display: flex; justify-content: space-between; margin-top: 15px; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px; text-align: center; }
+        .estat-box { flex: 1; }
+        .estat-box p { font-size: 11px; color: #dbeafe; }
+        .estat-box h4 { font-size: 14px; color: #fff; margin-top: 2px; }
+
+        .grid-2 { display: flex; gap: 15px; margin-bottom: 15px; }
+        .action-card { flex: 1; background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 15px; cursor: pointer; }
+        .action-card h4 { font-size: 15px; color: #fff; margin-bottom: 5px; }
+        .action-card p { font-size: 12px; color: #94a3b8; }
+
+        .promo-card { background: linear-gradient(135deg, #0f172a, #1e1b4b); border: 1px solid #3b82f6; border-radius: 16px; padding: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .promo-card h4 { font-size: 14px; color: #fff; }
+        .promo-card p { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+        .start-now-btn { background: #fff; color: #1e293b; border: none; padding: 8px 14px; border-radius: 20px; font-weight: bold; font-size: 12px; cursor: pointer; }
+
+        /* BOTTOM NAV BAR */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #1e293b; border-top: 1px solid #334155; display: flex; justify-content: space-around; padding: 10px 0; z-index: 100; }
+        .nav-item { text-align: center; color: #94a3b8; font-size: 11px; cursor: pointer; }
+        .nav-item.active { color: #38bdf8; }
+        .nav-item div { font-size: 18px; margin-bottom: 2px; }
+
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-<div class="container">
     <!-- AUTH SECTION -->
     <div id="authSection">
-        <h2 id="authTitle">🔐 User Register</h2>
-        <div class="form-group">
-            <label>Phone Number / Username</label>
-            <input type="text" id="username" placeholder="Enter phone or username">
+        <div class="auth-top">English</div>
+        <div style="padding: 20px;">
+            <h1 style="font-size: 28px; font-weight: bold;">Welcome Back</h1>
+            <p style="color: #cbd5e1; font-size: 14px; margin-top: 5px;">Login to your account</p>
         </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" id="password" placeholder="Enter password">
+        
+        <div class="auth-card">
+            <h2 id="authTitle">Login For Dream Fly</h2>
+            <div class="input-group">
+                <input type="text" id="mobile" placeholder="Mobile number">
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Please enter your password">
+            </div>
+            <div class="auth-links">
+                <span onclick="toggleMode()" id="toggleText">Register</span>
+                <span>Forget the password</span>
+            </div>
+            <button class="auth-btn" id="authBtn" onclick="handleAuth()">Login</button>
         </div>
-        <button id="authBtn" onclick="handleAuth()">Register Now</button>
-        <p style="text-align: center; margin-top: 15px; font-size: 14px; color: #94a3b8; cursor: pointer;" onclick="toggleAuthMode()">
-            Already have an account? <span id="toggleText" style="color: #38bdf8; text-decoration: underline;">Login here</span>
-        </p>
     </div>
 
     <!-- DASHBOARD SECTION -->
-    <div id="dashboardSection" class="hidden">
-        <h2>🚀 Dream Fly Income</h2>
-        
-        <div class="card">
-            <p>Main Wallet Balance</p>
-            <h3 id="userBalance">$10.00</h3>
+    <div id="dashboardSection">
+        <div class="dash-header">
+            <div class="dash-title">Welcome to,<br><span id="userNameDisplay">Dream Fly</span> — ID: <span id="userIdDisplay">--</span></div>
         </div>
 
-        <div class="stats-row">
-            <div class="stats-card">
-                <p style="font-size: 11px; color: #94a3b8;">Total Staked</p>
-                <h4 id="stakedAmount">$0.00</h4>
+        <div class="top-earned-card">
+            <div style="font-size: 13px; color: #94a3b8; display: flex; justify-content: space-between;">
+                <span>Total Earned</span>
+                <span>History</span>
             </div>
-            <div class="stats-card">
-                <p style="font-size: 11px; color: #94a3b8;">Total Profit</p>
-                <h4 id="profitAmount" style="color: #4ade80;">$0.00</h4>
+            <div class="earned-row">
+                <div class="earned-amount" id="totalEarned">$0.00</div>
+                <button class="withdraw-btn" onclick="openWithdraw()">Withdraw</button>
             </div>
         </div>
 
-        <div class="stats-row">
-            <div class="stats-card">
-                <p style="font-size: 11px; color: #94a3b8;">Referrals</p>
-                <h4 id="refCount">0</h4>
+        <div class="energy-card">
+            <div class="energy-title">⚡ DREAM FLY ENERGY</div>
+            <div class="energy-amount" id="energyBalance">0.0000</div>
+            <div class="energy-stats">
+                <div class="estat-box">
+                    <p>Daily Earn</p>
+                    <h4 id="dailyEarn">$0.00</h4>
+                </div>
+                <div class="estat-box" style="border-left: 1px solid rgba(255,255,255,0.2); border-right: 1px solid rgba(255,255,255,0.2);">
+                    <p>Return</p>
+                    <h4>6%</h4>
+                </div>
+                <div class="estat-box">
+                    <p>Settlement</p>
+                    <h4 id="timer">24:00:00</h4>
+                </div>
             </div>
-            <div class="stats-card">
-                <p style="font-size: 11px; color: #94a3b8;">Ref Commission</p>
-                <h4 id="refEarnings">$0.00</h4>
+        </div>
+
+        <div class="grid-2">
+            <div class="action-card" onclick="openDeposit()">
+                <h4>Buy Energy</h4>
+                <p>Higher returns</p>
+            </div>
+            <div class="action-card" onclick="openReferral()">
+                <h4>Refer Friend</h4>
+                <p>Get $10 bonus</p>
             </div>
         </div>
 
-        <!-- STAKE INVESTMENT BOX -->
-        <div class="card" style="text-align: left; background: #1e293b; border: 1px solid #334155;">
-            <label style="font-weight: bold; color: #38bdf8; margin-bottom: 8px;">Staking / Investment Plan</label>
-            <div class="form-group" style="margin-bottom: 8px;">
-                <input type="number" id="stakeInput" placeholder="Enter amount to stake ($)">
+        <div class="promo-card">
+            <div>
+                <h4>Weekend Special</h4>
+                <p>Earn up to 30% ROI in just 48 hours</p>
             </div>
-            <button onclick="stakeMoney()" style="background: #16a34a;">Start Staking</button>
+            <button class="start-now-btn" onclick="startSpecial()">START NOW</button>
         </div>
-
-        <div class="card" style="text-align: left;">
-            <p style="text-align: center; margin-bottom: 5px; font-weight: bold; font-size: 13px;">Your Referral Link</p>
-            <div class="ref-box" id="refLink">Loading...</div>
-        </div>
-
-        <div class="form-group">
-            <label>Withdrawal Amount ($)</label>
-            <input type="number" id="wAmount" placeholder="Enter amount to withdraw">
-        </div>
-
-        <button onclick="submitWithdrawal()">Withdraw Now</button>
-        <button onclick="logout()" style="background: #ef4444; margin-top: 10px;">Logout</button>
     </div>
-</div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <div class="bottom-nav" id="bottomNav" style="display: none;">
+        <div class="nav-item active">
+            <div>🏠</div>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="openReferral()">
+            <div>👥</div>
+            <span>Share</span>
+        </div>
+        <div class="nav-item" onclick="logout()">
+            <div>⚙️</div>
+            <span>Logout</span>
+        </div>
+    </div>
 
 <script>
-    let isLoginMode = false;
+    let isRegister = false;
 
     window.onload = function() {
-        let loggedUser = localStorage.getItem('df_logged_user');
-        if (loggedUser) {
-            showDashboard(loggedUser);
-        }
-        
-        const urlParams = new URLSearchParams(window.location.search);
-        const refBy = urlParams.get('ref');
-        if (refBy) {
-            localStorage.setItem('df_invited_by', refBy);
+        let logged = localStorage.getItem('df_logged');
+        if(logged) {
+            loadDashboard(logged);
         }
     }
 
-    function toggleAuthMode() {
-        isLoginMode = !isLoginMode;
-        document.getElementById('authTitle').innerText = isLoginMode ? "🔐 User Login" : "🔐 User Register";
-        document.getElementById('authBtn').innerText = isLoginMode ? "Login" : "Register Now";
-        document.getElementById('toggleText').innerText = isLoginMode ? "Register here" : "Login here";
+    function toggleMode() {
+        isRegister = !isRegister;
+        document.getElementById('authTitle').innerText = isRegister ? "Register For Dream Fly" : "Login For Dream Fly";
+        document.getElementById('authBtn').innerText = isRegister ? "Register" : "Login";
+        document.getElementById('toggleText').innerText = isRegister ? "Already have account? Login" : "Register";
     }
 
     function handleAuth() {
-        let user = document.getElementById('username').value.trim();
+        let mobile = document.getElementById('mobile').value.trim();
         let pass = document.getElementById('password').value.trim();
 
-        if (!user || !pass) {
-            alert("Please fill in all fields!");
+        if(!mobile || !pass) {
+            alert("Please fill all fields!");
             return;
         }
 
-        if (!isLoginMode) {
-            localStorage.setItem('df_user_' + user, pass);
-            localStorage.setItem('df_balance_' + user, "10.00");
-            localStorage.setItem('df_staked_' + user, "0.00");
-            localStorage.setItem('df_profit_' + user, "0.00");
-            localStorage.setItem('df_refs_' + user, "0");
-            localStorage.setItem('df_ref_earn_' + user, "0.00");
-            
-            let invitedBy = localStorage.getItem('df_invited_by');
-            if (invitedBy && invitedBy !== user) {
-                let inviterRefs = parseInt(localStorage.getItem('df_refs_' + invitedBy) || "0") + 1;
-                localStorage.setItem('df_refs_' + invitedBy, inviterRefs);
-                let inviterEarn = parseFloat(localStorage.getItem('df_ref_earn_' + invitedBy) || "0.00") + 5.00;
-                localStorage.setItem('df_ref_earn_' + invitedBy, inviterEarn.toFixed(2));
-                let inviterBal = parseFloat(localStorage.getItem('df_balance_' + invitedBy) || "10.00") + 5.00;
-                localStorage.setItem('df_balance_' + invitedBy, inviterBal.toFixed(2));
-            }
-
-            alert("Registration Successful! Welcome bonus $10 added.");
-        } else {
-            let savedPass = localStorage.getItem('df_user_' + user);
-            if (!savedPass || savedPass !== pass) {
-                alert("Invalid username or password!");
+        if(isRegister) {
+            if(localStorage.getItem('df_user_' + mobile)) {
+                alert("User already exists!");
                 return;
             }
+            localStorage.setItem('df_user_' + mobile, pass);
+            localStorage.setItem('df_earned_' + mobile, "0.00");
+            localStorage.setItem('df_energy_' + mobile, "50.00"); // Welcome energy
+            alert("Registration successful! Please login.");
+            toggleMode();
+        } else {
+            let saved = localStorage.getItem('df_user_' + mobile);
+            if(!saved || saved !== pass) {
+                alert("Invalid mobile or password!");
+                return;
+            }
+            localStorage.setItem('df_logged', mobile);
+            loadDashboard(mobile);
         }
-
-        localStorage.setItem('df_logged_user', user);
-        showDashboard(user);
     }
 
-    function showDashboard(user) {
+    function loadDashboard(mobile) {
         document.getElementById('authSection').classList.add('hidden');
-        document.getElementById('dashboardSection').classList.remove('hidden');
+        document.getElementById('dashboardSection').style.display = 'block';
+        document.getElementById('bottomNav').style.display = 'flex';
+        
+        document.getElementById('userNameDisplay').innerText = "DF User";
+        document.getElementById('userIdDisplay').innerText = mobile.slice(-6);
 
-        let balance = localStorage.getItem('df_balance_' + user) || "10.00";
-        let staked = localStorage.getItem('df_staked_' + user) || "0.00";
-        let profit = localStorage.getItem('df_profit_' + user) || "0.00";
-        let refs = localStorage.getItem('df_refs_' + user) || "0";
-        let refEarn = localStorage.getItem('df_ref_earn_' + user) || "0.00";
+        let earned = localStorage.getItem('df_earned_' + mobile) || "0.00";
+        let energy = localStorage.getItem('df_energy_' + mobile) || "50.00";
 
-        document.getElementById('userBalance').innerText = "$" + balance;
-        document.getElementById('stakedAmount').innerText = "$" + staked;
-        document.getElementById('profitAmount').innerText = "$" + profit;
-        document.getElementById('refCount').innerText = refs;
-        document.getElementById('refEarnings').innerText = "$" + refEarn;
-
-        const currentUrl = window.location.origin + window.location.pathname;
-        document.getElementById('refLink').innerText = currentUrl + "?ref=" + user;
+        document.getElementById('totalEarned').innerText = "$" + earned;
+        document.getElementById('energyBalance').innerText = parseFloat(energy).toFixed(4);
+        document.getElementById('dailyEarn').innerText = "$" + (parseFloat(energy) * 0.06).toFixed(2);
     }
 
-    function stakeMoney() {
-        let user = localStorage.getItem('df_logged_user');
-        let amount = parseFloat(document.getElementById('stakeInput').value);
-        let currentBal = parseFloat(localStorage.getItem('df_balance_' + user) || "0");
-
-        if (!amount || amount <= 0) {
-            alert("Please enter a valid staking amount!");
-            return;
+    function openDeposit() {
+        let amount = prompt("Enter amount to buy Energy ($ min 10):");
+        if(amount && amount >= 10) {
+            let mobile = localStorage.getItem('df_logged');
+            let currentEnergy = parseFloat(localStorage.getItem('df_energy_' + mobile) || "0");
+            let newEnergy = currentEnergy + parseFloat(amount);
+            localStorage.setItem('df_energy_' + mobile, newEnergy);
+            loadDashboard(mobile);
+            alert("Successfully purchased energy!");
         }
-
-        if (amount > currentBal) {
-            alert("Insufficient main balance to stake this amount!");
-            return;
-        }
-
-        let newBal = currentBal - amount;
-        let currentStaked = parseFloat(localStorage.getItem('df_staked_' + user) || "0");
-        let newStaked = currentStaked + amount;
-        let currentProfit = parseFloat(localStorage.getItem('df_profit_' + user) || "0");
-        let addedProfit = (amount * 0.10); // 10% instant simulation profit
-        let newProfit = currentProfit + addedProfit;
-
-        localStorage.setItem('df_balance_' + user, newBal.toFixed(2));
-        localStorage.setItem('df_staked_' + user, newStaked.toFixed(2));
-        localStorage.setItem('df_profit_' + user, newProfit.toFixed(2));
-
-        alert("Staking Successful! You staked $" + amount + " and earned $" + addedProfit.toFixed(2) + " profit.");
-        document.getElementById('stakeInput').value = '';
-        showDashboard(user);
     }
 
-    function submitWithdrawal() {
-        let amount = document.getElementById('wAmount').value;
-        if (!amount || amount <= 0) {
-            alert("Please enter a valid withdrawal amount!");
-            return;
+    function openWithdraw() {
+        let amount = prompt("Enter amount to withdraw ($):");
+        if(amount) {
+            alert("Withdrawal request submitted successfully!");
         }
-        alert("Withdrawal request of $" + amount + " submitted successfully! Status: Pending.");
-        document.getElementById('wAmount').value = '';
+    }
+
+    function openReferral() {
+        let mobile = localStorage.getItem('df_logged');
+        let refLink = window.location.origin + window.location.pathname + "?ref=" + mobile;
+        prompt("Share this link with your friends to earn rewards:", refLink);
+    }
+
+    function startSpecial() {
+        alert("Weekend Special VIP staking activated successfully!");
     }
 
     function logout() {
-        localStorage.removeItem('df_logged_user');
+        localStorage.removeItem('df_logged');
         location.reload();
     }
 </script>
