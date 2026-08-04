@@ -366,7 +366,18 @@
     let currentUserKey = null;
 
     window.onload = function() {
+            db.ref('users').once('value', (snapshot) => {
+        if (snapshot.exists()) {
+            let totalUsersCount = Object.keys(snapshot.val()).length;
+            let totalUsersEl = document.getElementById('totalUsers');
+            if (totalUsersEl) {
+                totalUsersEl.innerText = totalUsersCount;
+            }
+        }
+    });
+
         let savedKey = localStorage.getItem('df_logged_user_key');
+       
         if(savedKey) {
             db.ref('users/' + savedKey).once('value').then((snapshot) => {
                 if(snapshot.exists()) {
